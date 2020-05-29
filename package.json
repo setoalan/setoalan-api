@@ -3,10 +3,19 @@
   "description": "Alan Seto's Personal API",
   "version": "0.1.0",
   "author": "Alan Seto <alantseto@gmail.com> (https://alanseto.com)",
-  "dependencies": {},
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "express": "~4.17.1",
+    "jade": "~1.11.0",
+    "morgan": "^1.10.0",
+    "serve-favicon": "~2.4.2"
+  },
   "devDependencies": {},
   "license": "MIT",
   "scripts": {
+    "start": "node ./bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
