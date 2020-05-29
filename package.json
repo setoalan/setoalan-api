@@ -1,0 +1,19 @@
+{
+  "name": "setoalan-api",
+  "description": "Alan Seto's Personal API",
+  "version": "0.1.0",
+  "author": "Alan Seto <alantseto@gmail.com> (https://alanseto.com)",
+  "dependencies": {},
+  "devDependencies": {},
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/setoalan/setoalan-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/setoalan/setoalan-api/issues"
+  }
+}
