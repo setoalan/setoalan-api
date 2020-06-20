@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-import app from '../app';
+import app from '../build/app';
 import debug from 'debug';
 import http from 'http';
 
@@ -62,7 +62,7 @@ function onError(error) {
     throw error;
   }
 
-  const bind = typeof port === 'string' ? `${Pipe} port` : `${Port} port`;
+  const bind = typeof port === 'string' ? `Pipe ${port}` : `Port ${port}`;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {

@@ -1,9 +1,11 @@
 import axios from 'axios';
+import type { Request, Response } from 'express';
+import type { lastfmData } from '../@types/lastfm.type';
 
 const LASTFM_URL = 'http://ws.audioscrobbler.com/2.0/';
 
-const parseLastfmData = (objects) => {
-  return objects.map((object) => {
+const parseLastfmData = (objects: lastfmData[]) => {
+  return objects.map((object: lastfmData) => {
     return {
       rank: object['@attr'].rank,
       name: object.name,
@@ -16,7 +18,7 @@ const parseLastfmData = (objects) => {
   });
 };
 
-const getWeeklyChartList = async (req, res) => {
+const getWeeklyChartList = async (req: Request, res: Response) => {
   try {
     const chartMethods = ['user.gettopartists', 'user.gettopalbums', 'user.gettoptracks'];
 
@@ -40,8 +42,12 @@ const getWeeklyChartList = async (req, res) => {
       albums: parseLastfmData(albums?.data?.topalbums?.album),
       tracks: parseLastfmData(tracks?.data?.toptracks?.track),
     });
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    res.status(404);
+    res.render('error', {
+      message: err.message,
+      err,
+    });
   }
 };
 
