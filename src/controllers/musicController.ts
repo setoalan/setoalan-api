@@ -43,11 +43,9 @@ const getWeeklyChartList = async (req: Request, res: Response) => {
       tracks: parseLastfmData(tracks?.data?.toptracks?.track),
     });
   } catch (err) {
+    const { message } = err;
     res.status(404);
-    res.render('error', {
-      message: err.message,
-      err,
-    });
+    res.render('error', { message, err });
   }
 };
 
