@@ -4,9 +4,10 @@
  * Module dependencies.
  */
 
-import app from '../build/app';
-import debug from 'debug';
 import http from 'http';
+import { AddressInfo } from 'net';
+import debug from 'debug';
+import app from './app';
 
 debug('setoalan-api:server');
 
@@ -28,7 +29,8 @@ const server = http.createServer(app);
  */
 
 server.listen(port, () => {
-  console.log(`Express running → PORT ${server.address().port}`);
+  const { port: addressPort } = server.address() as AddressInfo;
+  console.log(`Express running → PORT ${addressPort}`);
 });
 server.on('error', onError);
 server.on('listening', onListening);
@@ -37,7 +39,7 @@ server.on('listening', onListening);
  * Normalize a port into a number, string, or false.
  */
 
-function normalizePort(val) {
+function normalizePort(val: string) {
   const port = parseInt(val, 10);
 
   if (isNaN(port)) {
@@ -57,7 +59,7 @@ function normalizePort(val) {
  * Event listener for HTTP server "error" event.
  */
 
-function onError(error) {
+function onError(error: NodeJS.ErrnoException) {
   if (error.syscall !== 'listen') {
     throw error;
   }
@@ -85,6 +87,6 @@ function onError(error) {
 
 function onListening() {
   const addr = server.address();
-  const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
+  const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr?.port}`;
   debug(`Listening on ${bind}`);
 }
