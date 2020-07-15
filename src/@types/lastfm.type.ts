@@ -16,9 +16,7 @@ interface lastfmStreamable {
 
 export interface lastfmData {
   artist?: lastfmArtist;
-  '@attr': {
-    rank: string;
-  };
+  '@attr': { rank: string };
   mbid: string;
   url: string;
   duration?: string;

@@ -19,34 +19,28 @@ const parseLastfmData = (objects: lastfmData[]) => {
 };
 
 const getWeeklyChartList = async (req: Request, res: Response) => {
-  try {
-    const chartMethods = ['user.gettopartists', 'user.gettopalbums', 'user.gettoptracks'];
+  const chartMethods = ['user.gettopartists', 'user.gettopalbums', 'user.gettoptracks'];
 
-    const chartPromises = chartMethods.map((chart) => {
-      return axios.get(`${LASTFM_URL}`, {
-        params: {
-          method: chart,
-          user: process.env.LASTFM_USER,
-          period: '7day',
-          limit: 10,
-          api_key: process.env.LASTFM_API_KEY,
-          format: 'json',
-        },
-      });
+  const chartPromises = chartMethods.map((chart) => {
+    return axios.get(`${LASTFM_URL}`, {
+      params: {
+        method: chart,
+        user: process.env.LASTFM_USER,
+        period: '7day',
+        limit: 10,
+        api_key: process.env.LASTFM_API_KEY,
+        format: 'json',
+      },
     });
+  });
 
-    const [artists, albums, tracks] = await Promise.all([...chartPromises]);
+  const [artists, albums, tracks] = await Promise.all([...chartPromises]);
 
-    return res.json({
-      artists: parseLastfmData(artists?.data?.topartists?.artist),
-      albums: parseLastfmData(albums?.data?.topalbums?.album),
-      tracks: parseLastfmData(tracks?.data?.toptracks?.track),
-    });
-  } catch (err) {
-    const { message } = err;
-    res.status(404);
-    res.render('error', { message, err });
-  }
+  return res.json({
+    artists: parseLastfmData(artists?.data?.topartists?.artist),
+    albums: parseLastfmData(albums?.data?.topalbums?.album),
+    tracks: parseLastfmData(tracks?.data?.toptracks?.track),
+  });
 };
 
 export { getWeeklyChartList };
