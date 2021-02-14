@@ -1,6 +1,6 @@
 import axios from 'axios';
 import type { Request, Response } from 'express';
-import type { lastfmData } from '../@types/lastfm.type';
+import type { lastfmData } from '../types/lastfm';
 
 const LASTFM_URL = 'http://ws.audioscrobbler.com/2.0/';
 

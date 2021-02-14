@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from 'express';
-import type { HttpError } from '../@types/error.type';
+import type { HttpError } from '../types/error';
 
 // Catch Errors Handler
 export const catchErrors = (
