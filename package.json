@@ -10,18 +10,18 @@
     "url": "git+https://github.com/setoalan/setoalan-api.git"
   },
   "license": "MIT",
-  "author": "Alan Seto <alantseto@gmail.com> (https://alanseto.com)",
+  "author": "Alan Seto <alantseto@gmail.com>",
   "scripts": {
     "build": "npm run build:tsc && npm run copy:assets",
     "build:tsc": "tsc",
     "copy:assets": "ts-node utils/copyStaticAssets.ts",
     "dev": "concurrently 'npm run watch:tsc' 'npm run watch:node'",
-    "format": "prettier --write \"**/*.+(ts|tsx)\"",
+    "format": "prettier --write '**/*.+(ts|tsx)'",
     "lint": "eslint '**/*.+(ts|tsx)'",
     "lint-staged": "lint-staged",
-    "start": "node ./build/server",
+    "start": "node ./build/src/server",
     "test": "echo 'Error: no test specified' && exit 1",
-    "watch:node": "nodemon build/server.js",
+    "watch:node": "nodemon build/src/server.js",
     "watch:tsc": "tsc -w"
   },
   "husky": {
