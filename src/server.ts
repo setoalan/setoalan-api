@@ -1,4 +1,5 @@
 import http from 'http';
+import mongoose from 'mongoose';
 import debug from 'debug';
 import app from './app';
 import type { AddressInfo } from 'net';
@@ -36,6 +37,11 @@ function onListening() {
   const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr?.port}`;
   debug(`Listening on ${bind}`);
 }
+
+mongoose.connect(process.env.DATABASE || '', { useNewUrlParser: true, useUnifiedTopology: true });
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error: \n'));
+db.once('open', () => console.log('Connected to MongoDB'));
 
 const port = normalizePort(process.env.PORT || '8000');
 app.set('port', port);

@@ -21,7 +21,7 @@ const parseLastfmData = (objects: lastfmData[]) => {
 const getWeeklyChartList = async (req: Request, res: Response) => {
   const chartMethods = ['user.gettopartists', 'user.gettopalbums', 'user.gettoptracks'];
 
-  const chartPromises = chartMethods.map((chart) => {
+  const chartPromises = chartMethods.map(chart => {
     return axios.get(`${LASTFM_URL}`, {
       params: {
         method: chart,

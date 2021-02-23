@@ -12,16 +12,16 @@
   "license": "MIT",
   "author": "Alan Seto <alantseto@gmail.com>",
   "scripts": {
-    "build": "npm run build:tsc && npm run copy:assets",
+    "build": "npm run copy:assets && npm run build:tsc",
     "build:tsc": "tsc",
     "copy:assets": "ts-node utils/copyStaticAssets.ts",
-    "dev": "concurrently 'npm run watch:tsc' 'npm run watch:node'",
+    "dev": "npm run build && concurrently 'npm run watch:tsc' 'npm run watch:node'",
     "format": "prettier --write '**/*.+(ts|tsx)'",
     "lint": "eslint '**/*.+(ts|tsx)'",
     "lint-staged": "lint-staged",
     "start": "node ./build/src/server",
     "test": "echo 'Error: no test specified' && exit 1",
-    "watch:node": "nodemon build/src/server.js",
+    "watch:node": "nodemon build/src/server.js --ignore src/public",
     "watch:tsc": "tsc -w"
   },
   "husky": {
@@ -42,6 +42,7 @@
     "debug": "^4.3.1",
     "dotenv": "^8.2.0",
     "express": "~4.17.1",
+    "mongoose": "^5.11.15",
     "morgan": "^1.10.0",
     "pug": "^3.0.0",
     "serve-favicon": "^2.5.0"
