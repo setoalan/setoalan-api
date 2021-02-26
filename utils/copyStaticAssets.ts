@@ -1,7 +1,7 @@
 import * as shell from 'shelljs';
 
 shell.rm('-rf', 'build');
-shell.mkdir('-p', 'build/src/public');
-shell.mkdir('-p', 'build/src/views');
-shell.cp('-R', 'src/public', 'build/src');
-shell.cp('-R', 'src/views', 'build/src');
+shell.mkdir('-p', 'build/public');
+shell.mkdir('-p', 'build/views');
+shell.cp('-R', 'public', 'build');
+shell.cp('-R', 'views', 'build');

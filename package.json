@@ -19,9 +19,9 @@
     "format": "prettier --write '**/*.+(ts|tsx)'",
     "lint": "eslint '**/*.+(ts|tsx)'",
     "lint-staged": "lint-staged",
-    "start": "node ./build/src/server",
+    "start": "node ./build/server",
     "test": "echo 'Error: no test specified' && exit 1",
-    "watch:node": "nodemon build/src/server.js --ignore src/public",
+    "watch:node": "nodemon build/server.js --ignore public",
     "watch:tsc": "tsc -w"
   },
   "husky": {
