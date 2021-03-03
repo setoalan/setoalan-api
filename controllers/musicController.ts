@@ -18,7 +18,7 @@ const parseLastfmData = (objects: lastfmData[]) => {
   });
 };
 
-const getWeeklyChartList = async (req: Request, res: Response) => {
+export const getWeeklyChartList = async (req: Request, res: Response) => {
   const chartMethods = ['user.gettopartists', 'user.gettopalbums', 'user.gettoptracks'];
 
   const chartPromises = chartMethods.map(chart => {
@@ -42,5 +42,3 @@ const getWeeklyChartList = async (req: Request, res: Response) => {
     tracks: parseLastfmData(tracks?.data?.toptracks?.track),
   });
 };
-
-export { getWeeklyChartList };

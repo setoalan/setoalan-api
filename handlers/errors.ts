@@ -1,22 +1,18 @@
 import type { NextFunction, Request, Response } from 'express';
 import type { HttpError } from '../types/error';
 
-// Catch Errors Handler
-export const catchErrors = (
-  fn: (req: Request, res: Response, next: NextFunction) => Promise<Response<any> | undefined>
-) => {
+// eslint-disable-next-line no-unused-vars
+export const catchErrors = (fn: (req: Request, res: Response, next: NextFunction) => Promise<any>) => {
   return (req: Request, res: Response, next: NextFunction) => fn(req, res, next).catch(next);
 };
 
-// Not Found Error Handler
 export const notFound = (req: Request, res: Response, next: NextFunction) => {
   const err = new Error('Not Found') as HttpError;
   err.status = 404;
   next(err);
 };
 
-// Development Error Handler
-export const developmentErrors = (err: HttpError, req: Request, res: Response, next: NextFunction) => {
+export const developmentErrors = (err: HttpError, req: Request, res: Response) => {
   err.stack = err.stack || '';
   const errorDetails = {
     status: err.status || 500,
@@ -32,8 +28,7 @@ export const developmentErrors = (err: HttpError, req: Request, res: Response, n
   });
 };
 
-// Production Error Handler
-export const productionErrors = (err: HttpError, req: Request, res: Response, next: NextFunction) => {
+export const productionErrors = (err: HttpError, req: Request, res: Response) => {
   res.status(err.status || 500);
   res.render('error', {
     status: err.status || 500,
