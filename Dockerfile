@@ -1,7 +1,11 @@
-FROM node:15
-WORKDIR /build
-COPY package*.json ./
-RUN npm install
-COPY . .
+FROM node:15-alpine as base
+
+WORKDIR /src
+COPY package*.json /
 EXPOSE 8000
+
+FROM base as dev
+ENV NODE_ENV=development
+RUN npm install
+COPY . /
 CMD [ "npm", "run", "dev" ]
